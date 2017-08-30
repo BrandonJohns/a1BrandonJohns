@@ -45,31 +45,50 @@ def display_song_list(song_list):
     print(len(song_list) - count, "songs learned,", count, "songs still to learn")
 
 
+"""
+complete_a_song(song_list)
+    song_number = get_integer("song number: ")
+    song_list[song_number][3] = "n"
+    print song_list[song_number][0]+"by"+song_list[song_number][1]+"learned"
+    return song_list
+"""
 def complete_a_song(song_list):
-    song_number = input("enter the number of a song to mark as learned\n>>>")
+    song_number = get_integer("enter the number of a song to mark as learned\n>>>")
     # if song_number
 
 
 def song_adder():
-    title = input("Title: ")
-    string_error_checker(title, "Title: ")
-    artist = input("Artist: ")
-    string_error_checker(artist, "Artist: ")
-    year = int(input("Year: "))
-    integer_error_checker(year, "Year: ")
+    new_song = []
+    title = get_string("Title: ")
+    artist = get_string("Artist: ")
+    year = get_integer("Year: ")
+    new_song.append(title)
+    new_song.append(artist)
+    new_song.append(year)
+    new_song.append("y")
+    print(title, "by", artist, "({:4})".format(year), "added to song list")
+    return new_song
 
 
-def integer_error_checker(user_input, prompt):
-    while user_input <= 0:
-        print("Number must be >= 0")
-        user_input = int(input(prompt))
+def get_integer(prompt):
+    valid = False
+    while not valid:
+        try:
+            integer_input = int(input(prompt))
+            if integer_input <= 0:
+                print("Number must be >=0")
+            else:
+                valid = True
+        except ValueError:
+            print("Invalid input; enter a valid number")
+    return integer_input
 
-
-def string_error_checker(user_input, prompt):
-    while len(user_input) == 0:
+def get_string(prompt):
+    string_input = input(prompt)
+    while len(string_input) == 0:
         print("Input can not be blank")
-        user_input = input(prompt)
-
+        string_input = input(prompt)
+    return string_input.title()
 
 def menu():
     menu_prompt = "Menu:\nL - List songs\nA - Add new song\nC - Complete a song\nQ - Quit\n>>>"
@@ -80,17 +99,20 @@ def menu():
     return menu_selection
 
 
+def save_songs():
+
+
 def main():
     print("Songs To Learn 1.0 - by Brandon Johns")
     song_list = load_songs()
-    song_list.sort(key=itemgetter(1, 0))
     print(len(song_list), "songs loaded")
     menu_selection = menu()
     while menu_selection != "Q":
+        song_list.sort(key=itemgetter(1, 0))
         if menu_selection == "L":
             display_song_list(song_list)
         elif menu_selection == "A":
-            song_adder()
+            song_list.append(song_adder())
         else:
             complete_a_song(song_list)
         menu_selection = menu()
