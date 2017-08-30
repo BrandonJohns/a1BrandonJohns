@@ -2,7 +2,7 @@
 Replace the contents of this module docstring with your own details.
 """
 from operator import itemgetter
-
+FILE_NAME = "songs.csv"
 """
 load songs
     song_list = list
@@ -17,7 +17,7 @@ load songs
 
 def load_songs():
     song_list = []
-    in_file = open("songs.csv", 'r')
+    in_file = open(FILE_NAME, 'r')
     for line in in_file:
         line = line.strip("\n")
         song_artist_year_list = line.split(",")
@@ -65,7 +65,7 @@ def song_adder():
     new_song = []
     title = get_string("Title: ")
     artist = get_string("Artist: ")
-    year = get_integer("Year: ")
+    year = str(get_integer("Year: "))
     new_song.append(title)
     new_song.append(artist)
     new_song.append(year)
@@ -80,7 +80,7 @@ def get_integer(prompt):
         try:
             integer_input = int(input(prompt))
             if integer_input < 0:
-                print("Number must be >=0")
+                print("Number must be >= 0")
             else:
                 valid = True
         except ValueError:
@@ -105,7 +105,16 @@ def menu():
     return menu_selection
 
 
-#def save_songs():
+def save_songs(song_list):
+    out_file = open(FILE_NAME, 'w')
+    for i in range(len(song_list)):
+        if i != 0:
+            print("\n", end="", file=out_file)
+        for j in range(len(song_list[i])):
+            out_file.write(song_list[i][j])
+            if j != 3:
+                print(",", end="", file=out_file)
+    out_file.close()
 
 
 def main():
@@ -122,7 +131,8 @@ def main():
         else:
             complete_a_song(song_list)
         menu_selection = menu()
-
+    save_songs(song_list)
+    print(len(song_list), "songs saved to", FILE_NAME, "\nHave a nice day :)")
 
 if __name__ == '__main__':
     main()
