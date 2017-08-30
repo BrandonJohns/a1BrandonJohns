@@ -52,9 +52,13 @@ complete_a_song(song_list)
     print song_list[song_number][0]+"by"+song_list[song_number][1]+"learned"
     return song_list
 """
+
+
 def complete_a_song(song_list):
     song_number = get_integer("enter the number of a song to mark as learned\n>>>")
-    # if song_number
+    song_list[song_number][3] = "n"
+    print(song_list[song_number][0], "by", song_list[song_number][1], "learned")
+    return song_list
 
 
 def song_adder():
@@ -75,7 +79,7 @@ def get_integer(prompt):
     while not valid:
         try:
             integer_input = int(input(prompt))
-            if integer_input <= 0:
+            if integer_input < 0:
                 print("Number must be >=0")
             else:
                 valid = True
@@ -83,12 +87,14 @@ def get_integer(prompt):
             print("Invalid input; enter a valid number")
     return integer_input
 
+
 def get_string(prompt):
     string_input = input(prompt)
     while len(string_input) == 0:
         print("Input can not be blank")
         string_input = input(prompt)
     return string_input.title()
+
 
 def menu():
     menu_prompt = "Menu:\nL - List songs\nA - Add new song\nC - Complete a song\nQ - Quit\n>>>"
@@ -99,7 +105,7 @@ def menu():
     return menu_selection
 
 
-def save_songs():
+#def save_songs():
 
 
 def main():
