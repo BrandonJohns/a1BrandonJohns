@@ -1,5 +1,10 @@
 """
-Replace the contents of this module docstring with your own details.
+Brandon Johns
+Student ID: 13438272
+01/09/2017
+This program is an interactive song list that allows a user to add songs
+they wish to learn and songs the have learned.
+Git hub: https://github.com/BrandonJohns/a1BrandonJohns
 """
 from operator import itemgetter
 
@@ -16,6 +21,8 @@ load songs
 """
 
 
+# load_songs function opens the songs file and writes them to song_list a
+# list of lists
 def load_songs():
     song_list = []
     in_file = open(FILE_NAME, 'r')
@@ -27,6 +34,7 @@ def load_songs():
     return song_list
 
 
+# display_song_list function prints a formatted table of songs from song_list
 def display_song_list(song_list):
     count = 0
     for i in range(len(song_list)):
@@ -55,6 +63,8 @@ complete_a_song(song_list)
 """
 
 
+# complete_a_song function gets a song number input from the user and marks the song
+# as complete
 def complete_a_song(song_list):
     song_number = get_integer("enter the number of a song to mark as learned\n>>>")
     if song_list[song_number][3] == "n":
@@ -65,6 +75,7 @@ def complete_a_song(song_list):
         return song_list
 
 
+# song_adder function gets song details input from the user and adds it to the song_list
 def song_adder():
     new_song = []
     title = get_string("Title: ")
@@ -78,6 +89,7 @@ def song_adder():
     return new_song
 
 
+# get_integer function gets an integer input from the user and checks that it is valid
 def get_integer(prompt):
     integer_input = 0
     valid = False
@@ -93,6 +105,7 @@ def get_integer(prompt):
     return integer_input
 
 
+# get_string function gets a string input from the user and checks it is valid
 def get_string(prompt):
     string_input = input(prompt)
     while len(string_input) == 0:
@@ -101,6 +114,7 @@ def get_string(prompt):
     return string_input.title()
 
 
+# menu function displays the menu and gets menu selection input from the user
 def menu():
     menu_prompt = "Menu:\nL - List songs\nA - Add new song\nC - Complete a song\nQ - Quit\n>>>"
     menu_selection = input(menu_prompt).upper()
@@ -110,6 +124,7 @@ def menu():
     return menu_selection
 
 
+# save_songs function writes the song_list to a csv file
 def save_songs(song_list):
     out_file = open(FILE_NAME, 'w')
     for i in range(len(song_list)):
@@ -122,6 +137,7 @@ def save_songs(song_list):
     out_file.close()
 
 
+# main function brings all the other functions together
 def main():
     print("Songs To Learn 1.0 - by Brandon Johns")
     song_list = load_songs()
