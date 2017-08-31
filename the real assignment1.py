@@ -2,6 +2,7 @@
 Replace the contents of this module docstring with your own details.
 """
 from operator import itemgetter
+
 FILE_NAME = "songs.csv"
 """
 load songs
@@ -56,9 +57,12 @@ complete_a_song(song_list)
 
 def complete_a_song(song_list):
     song_number = get_integer("enter the number of a song to mark as learned\n>>>")
-    song_list[song_number][3] = "n"
-    print(song_list[song_number][0], "by", song_list[song_number][1], "learned")
-    return song_list
+    if song_list[song_number][3] == "n":
+        print("You have already learned", song_list[song_number][0])
+    else:
+        song_list[song_number][3] = "n"
+        print(song_list[song_number][0], "by", song_list[song_number][1], "learned")
+        return song_list
 
 
 def song_adder():
@@ -75,6 +79,7 @@ def song_adder():
 
 
 def get_integer(prompt):
+    integer_input = 0
     valid = False
     while not valid:
         try:
@@ -133,6 +138,7 @@ def main():
         menu_selection = menu()
     save_songs(song_list)
     print(len(song_list), "songs saved to", FILE_NAME, "\nHave a nice day :)")
+
 
 if __name__ == '__main__':
     main()
