@@ -91,7 +91,6 @@ def song_adder():
 
 # get_integer function gets an integer input from the user and checks that it is valid
 def get_integer(prompt):
-    integer_input = 0
     valid = False
     while not valid:
         try:
@@ -99,10 +98,9 @@ def get_integer(prompt):
             if integer_input < 0:
                 print("Number must be >= 0")
             else:
-                valid = True
+                return integer_input
         except ValueError:
             print("Invalid input; enter a valid number")
-    return integer_input
 
 
 # get_string function gets a string input from the user and checks it is valid
